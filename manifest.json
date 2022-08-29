@@ -1,0 +1,35 @@
+{
+    "name": "GSU Professor Rating",
+    "description": "Display the rating of your Georgia Southern professors!",
+    "version": "1.0.0",
+    "manifest_version": 3,
+    "background": {
+        "service_worker": "background.js"
+    },
+    "permissions": ["storage"],
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "/images/PR16.png",
+            "32": "/images/PR32.png",
+            "48": "/images/PR48.png",
+            "128": "/images/PR128.png"
+        }
+    },
+    "host_permissions": [
+        "https://coursesearch.georgiasouthern.edu/",
+        "https://www.ratemyprofessors.com/*/*"
+    ],
+    "icons": {
+        "16": "/images/PR16.png",
+        "32": "/images/PR32.png",
+        "48": "/images/PR48.png",   
+        "128": "/images/PR128.png"
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://coursesearch.georgiasouthern.edu/*"],
+            "js": ["/scripts/rating.js"]
+        }
+    ]
+}

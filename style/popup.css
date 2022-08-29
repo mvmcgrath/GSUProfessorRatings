@@ -1,0 +1,105 @@
+body {
+    height: 100%;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    background-color: #343a40;
+}
+
+.header {
+    font-family: Arial, sans-serif;
+    font-size: 1.25em;
+    color: #F8F8FF;
+    font-weight: 600;
+}
+
+.label {
+    font-family: Arial, sans-serif;
+    font-size: 1.5em;
+    position: relative;
+    display: inline-block;
+    left: 7px;
+    color: black;
+}
+
+.title {
+    text-align: center;
+    width: 120px;
+    height: 36px;
+    margin: 0px;
+    padding-left: 5px;
+    padding-bottom: 10px;
+}
+
+.options {
+    width: 120px;
+    height: 24px;
+    align-items: center;
+    display: flex;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    background-color: #EFD6AC;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color:#011E41;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 4px;
+    bottom: 5px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #011E41;
+}
+
+input:checked + .slider {
+    background-color: #087E8B;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(19px);
+    -ms-transform: translateX(19px);
+    transform: translateX(19px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50px;
+}

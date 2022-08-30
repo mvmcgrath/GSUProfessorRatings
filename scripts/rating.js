@@ -2,14 +2,14 @@ const config = { attributes: true, childList: true };
 let tableChangeObserver = null;
 
 // If table completely refreshes
-function tableRefresh(mutationList, observer) {
+function tableRefresh() {
     updateHeader();
     prepareRows();
     addTableChangeObserver();
 }
 
 // If table length/sorting changes
-function tableChange (mutationList, observer) {
+function tableChange () {
     prepareRows();
 }
 
@@ -22,8 +22,8 @@ function prepareRows() {
     
     const professorNames = professorNodes
         .map(professor => professor.getElementsByTagName("a")[0] ? 
-            professor.getElementsByTagName("a")[0].textContent.split(", ").join(" ") :
-            professor.textContent.split(", ").join(" "));
+            professor.getElementsByTagName("a")[0].textContent.split(", ").join(" ").split(" ").join("%20") :
+            professor.textContent.split(", ").join(" ").split(" ").join("%20"));
 
     if (professorNames.length !== 0) {
         chrome.runtime.sendMessage({ professorNames })
@@ -34,7 +34,6 @@ function prepareRows() {
 }
 
 function populateRows(professorNames, professorNodes, professorList) {
-    // Needs refactor. Would love zip here :)
     for (let i = 0; i < professorNames.length; i++) {
         const name = professorNames[i];
         const node = professorNodes[i];
@@ -46,10 +45,10 @@ function populateRows(professorNames, professorNodes, professorList) {
 
         const parent = node.parentElement;
 
-        const text = professorList.hasOwnProperty(name) ? "⭐ ".concat(convertNum(professorList[name].rating)) : "N/A";
+        const text = professorList.hasOwnProperty(name) && parseFloat(professorList[name].rating) !== 0 ? convertNum(professorList[name].rating) : "N/A";
         const link = professorList.hasOwnProperty(name) ? professorList[name].link : "";
 
-        if (text === "N/A") {
+        if (link === "") {
             newElement("td", text, beforeElement, parent);
             continue;
         }
@@ -57,7 +56,7 @@ function populateRows(professorNames, professorNodes, professorList) {
         newRowElement = newElement("td", "", beforeElement, parent);
         newLinkElement = document.createElement("a");
 
-        newLinkElement.textContent = text;
+        newLinkElement.textContent = "⭐ ".concat(text);
         newLinkElement.href = link;
         newLinkElement.target = "_blank";
 

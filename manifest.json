@@ -1,12 +1,12 @@
 {
-    "name": "GSU Professor Rating",
+    "name": "GSU Professor Ratings",
     "description": "Display the rating of your Georgia Southern professors!",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "manifest_version": 3,
     "background": {
         "service_worker": "background.js"
     },
-    "permissions": ["storage"],
+    "permissions": ["storage", "alarms"],
     "action": {
         "default_popup": "popup.html",
         "default_icon": {
